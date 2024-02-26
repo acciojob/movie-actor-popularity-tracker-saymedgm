@@ -3,8 +3,8 @@ package com.driver;
 import java.util.*;
 
 public class MovieActorPopularityTracker {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         Queue<Actor> actorQueue = new LinkedList<>();
         Deque<Actor> actorDeque = new ArrayDeque<>();
 
@@ -35,25 +35,52 @@ public class MovieActorPopularityTracker {
         }
     }
 
-
     public static void printMenu() {
-    	//your code goes here
+        System.out.println("Choose an option:");
+        System.out.println("1. Enqueue Actor");
+        System.out.println("2. Dequeue Actor");
+        System.out.println("3. Display Actors");
+        System.out.println("4. Increase Popularity");
+        System.out.println("5. Exit");
     }
 
     public static void enqueueActor(Scanner scanner, Queue<Actor> queue) {
-    	//your code goes here
+        System.out.println("Enter actor name: ");
+        String name = scanner.next();
+        queue.offer(new Actor(name, 0));
+        System.out.println(name + " added to the queue.");
     }
 
     public static void dequeueActor(Deque<Actor> deque) {
-    	//your code goes here
+        Actor removedActor = deque.pollFirst();
+        if (removedActor != null) {
+            System.out.println(removedActor.getName() + " dequeued.");
+        } else {
+            System.out.println("No actors to dequeue.");
+        }
     }
 
     public static void displayActors(Deque<Actor> deque) {
-    	//your code goes here
+        if (deque.isEmpty()) {
+            System.out.println("No actors to display.");
+        } else {
+            System.out.println("Actors in the deque:");
+            for (Actor actor : deque) {
+                System.out.println(actor);
+            }
+        }
     }
 
     public static void increasePopularity(Scanner scanner, Deque<Actor> deque) {
-    	//your code goes here
+        System.out.println("Enter actor name to increase popularity: ");
+        String name = scanner.next();
+        for (Actor actor : deque) {
+            if (actor.getName().equalsIgnoreCase(name)) {
+                actor.increasePopularity();
+                System.out.println(actor.getName() + " popularity increased.");
+                return;
+            }
+        }
+        System.out.println("Actor not found.");
     }
 }
-
